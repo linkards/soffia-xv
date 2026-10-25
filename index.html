@@ -456,8 +456,9 @@
 
             <form id="rsvpForm" class="space-y-3 mt-4" onsubmit="handleWhatsAppRSVP(event)">
                 <div>
-                    <label class="block text-[11px] font-medium text-[#583375] mb-1">Nombre Completo *</label>
-                    <input type="text" id="rsvpFullName" required placeholder="Ingresa tu nombre y apellido" class="w-full text-xs px-3 py-2.5 rounded-xl border border-[#aa8c70]/40 bg-white focus:outline-none focus:ring-2 focus:ring-[#8257a6]">
+                    <label class="block text-[11px] font-medium text-[#583375] mb-1">Nombre(s) de los asistentes *</label>
+                      <textarea id="rsvpGuestsNames" required rows="3" placeholder="Ej. Juan Pérez, María Gómez..." class="w-full text-xs px-3 py-2.5 rounded-xl border border-[#aa8c70]/40 bg-white focus:outline-none focus:ring-2 focus:ring-[#8257a6] resize-none"></textarea>
+                      <span class="block text-[10px] text-[#a4999b] mt-1 italic">Escribe el nombre de cada persona que asistirá para nuestro control de acceso.</span>
                 </div>
 
                 <div>
@@ -664,12 +665,12 @@
 
             const phoneNumber = "528671579999";
 
-            const fullName = document.getElementById('rsvpFullName').value.trim();
+            const guestsNames = document.getElementById('rsvpGuestsNames').value.trim();
             const attendance = document.querySelector('input[name="attendance"]:checked')?.value || "Confirmado";
 
             let message = `¡Hola Soffia! ✨\n\n`;
-            message += `Soy *${fullName}*.\n`;
             message += `*Confirmación:* ${attendance}\n`;
+            message += `*Nombre(s) de asistente(s):*\n${guestsNames}\n`;
             message += `\n¡Gracias por la invitación a tus XV Años! 👑`;
 
             const encodedMessage = encodeURIComponent(message);
