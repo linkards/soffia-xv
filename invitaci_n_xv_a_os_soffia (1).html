@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mis XV Años - Soffia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --ruby-red: #8257a6;
+            --ruby-dark: #583375;
+            --ruby-light: #9d71c4;
+            --champagne-gold: #aa8c70;
+            --champagne-light: #d6c6b4;
+            --taupe-gray: #a4999b;
+            --taupe-dark: #524749;
+            --ivory-cream: #fcfbfa;
+            --ivory-warm: #f6f2ee;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #E5D5F1;
+            color: #4a3e40;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-script {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .font-serif-title {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .petal {
+            position: fixed;
+            top: -60px;
+            background: radial-gradient(circle at 30% 30%, #c49be0 0%, #6d428e 80%);
+            border-radius: 150% 0 150% 0;
+            pointer-events: none;
+            z-index: 1;
+            box-shadow: 0 2px 6px rgba(109, 66, 142, 0.25);
+            opacity: 0;
+            animation: drift linear infinite;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translateY(-80px) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            8% {
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.65;
+            }
+            85% {
+                opacity: 0.65;
+            }
+            100% {
+                transform: translateY(115vh) rotate(360deg) scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        .fog-silhouette-border {
+            position: absolute;
+            bottom: -36px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 68px;
+            pointer-events: none;
+            z-index: 22;
+        }
+
+        .polaroid-card {
+            background: #ffffff;
+            box-shadow: 0 8px 20px -4px rgba(88, 51, 117, 0.12), 0 2px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-45px) rotate(-8deg) scale(0.92);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(45px) rotate(8deg) scale(0.92);
+        }
+
+        .reveal-left.revealed {
+            opacity: 1;
+            transform: translateX(0) rotate(var(--natural-rotation, -1.5deg)) scale(1);
+        }
+
+        .reveal-right.revealed {
+            opacity: 1;
+            transform: translateX(0) rotate(var(--natural-rotation, 1.5deg)) scale(1);
+        }
+
+        .polaroid-card.revealed:hover {
+            transform: scale(1.04) rotate(0deg) !important;
+            z-index: 10;
+        }
+
+        .timeline-step {
+            opacity: 0;
+            transform: translateY(35px) scale(0.96);
+            transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+
+        .timeline-step.revealed {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .wine-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(170, 140, 112, 0.35);
+            box-shadow: 0 10px 25px -5px rgba(88, 51, 117, 0.07);
+        }
+
+        @keyframes crossfade {
+            0%, 45% {
+                opacity: 1;
+            }
+            55%, 95% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .hero-slide-1 {
+            animation: crossfade 10s ease-in-out infinite;
+        }
+
+        .hero-slide-2 {
+            animation: crossfade 10s ease-in-out infinite reverse;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E5D5F1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #aa8c70;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen bg-[#E5D5F1] text-[#4a3e40] antialiased selection:bg-purple-200">
+
+    <div id="petals-container" aria-hidden="true"></div>
+
+    <div class="mx-auto max-w-md bg-[#fcfbfa] min-h-screen shadow-2xl relative z-10 overflow-hidden border-x border-[#aa8c70]/20">
+
+        <header class="relative min-h-[92vh] flex flex-col justify-between items-center text-center text-white px-6 pt-12 pb-8 overflow-hidden">
+            <div class="absolute top-4 right-4 z-30">
+                <button id="musicToggle" class="w-11 h-11 rounded-full bg-black/35 backdrop-blur-md border border-white/40 shadow-lg flex items-center justify-center text-white transition hover:bg-black/55 active:scale-95" aria-label="Reproducir música">
+                    <i data-lucide="volume-x" id="musicIcon" class="w-5 h-5 drop-shadow"></i>
+                </button>
+            </div>
+
+            <audio id="bgMusic" loop preload="auto">
+                <source src="musica.mp3">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+
+            <div class="absolute inset-0 z-0">
+                <img 
+                    src="principal1.webp" 
+                    alt="Quinceañera Soffia 1" 
+                    class="hero-slide-1 absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.92] transition-opacity duration-1000"
+                >
+                <img 
+                    src="principal2.webp" 
+                    alt="Quinceañera Soffia 2" 
+                    class="hero-slide-2 absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.92] transition-opacity duration-1000"
+                >
+                <div class="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/85"></div>
+                <div class="absolute inset-0 bg-[#583375]/30 mix-blend-multiply"></div>
+            </div>
+
+            <div class="relative z-10 mt-4 sm:mt-6 mb-auto pt-6 pb-2">
+                <h1 class="font-script text-7xl sm:text-8xl text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] font-normal tracking-wide">
+                    Soffia
+                </h1>
+                <p class="font-serif-title uppercase tracking-[0.35em] text-sm sm:text-base text-[#f6f2ee] mt-2 font-light drop-shadow">
+                    Mis XV Años
+                </p>
+            </div>
+
+            <div class="relative z-10 w-full pb-4">
+                <div class="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
+                    <p class="font-serif-title text-xl sm:text-2xl italic tracking-wider text-white drop-shadow mb-3">
+                        14 de Noviembre, 2026
+                    </p>
+                    <div class="w-16 h-[1.5px] bg-[#aa8c70] mx-auto mb-4"></div>
+                    <div class="grid grid-cols-4 gap-2 text-center max-w-xs mx-auto">
+                        <div class="p-1">
+                            <span id="days" class="block font-serif-title text-3xl sm:text-4xl font-semibold leading-tight drop-shadow">000</span>
+                            <span class="text-[10px] uppercase tracking-widest text-[#d6c6b4] drop-shadow">Días</span>
+                        </div>
+                        <div class="p-1">
+                            <span id="hours" class="block font-serif-title text-3xl sm:text-4xl font-semibold leading-tight drop-shadow">00</span>
+                            <span class="text-[10px] uppercase tracking-widest text-[#d6c6b4] drop-shadow">Horas</span>
+                        </div>
+                        <div class="p-1">
+                            <span id="minutes" class="block font-serif-title text-3xl sm:text-4xl font-semibold leading-tight drop-shadow">00</span>
+                            <span class="text-[10px] uppercase tracking-widest text-[#d6c6b4] drop-shadow">Minutos</span>
+                        </div>
+                        <div class="p-1">
+                            <span id="seconds" class="block font-serif-title text-3xl sm:text-4xl font-semibold leading-tight drop-shadow">00</span>
+                            <span class="text-[10px] uppercase tracking-widest text-[#d6c6b4] drop-shadow">Segundos</span>
+                        </div>
+                    </div>
+                    <p class="text-xs tracking-wider text-[#f6f2ee] drop-shadow mt-2 font-light text-center">Faltan para el gran día</p>
+                </div>
+            </div>
+
+            <div class="fog-silhouette-border">
+                <svg viewBox="0 0 1200 180" preserveAspectRatio="none" class="w-full h-full block">
+                    <defs>
+                        <filter id="fogCloudTurbulence" x="0%" y="0%" width="100%" height="100%">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.028 0.045" numOctaves="4" result="noise" />
+                            <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G" />
+                        </filter>
+
+                        <linearGradient id="fogFadeGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+                            <stop offset="35%" stop-color="#ffffff" stop-opacity="0.55" />
+                            <stop offset="70%" stop-color="#fcfbfa" stop-opacity="0.95" />
+                            <stop offset="100%" stop-color="#fcfbfa" stop-opacity="1" />
+                        </linearGradient>
+
+                        <linearGradient id="fogPuffGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
+                            <stop offset="100%" stop-color="#fcfbfa" stop-opacity="1" />
+                        </linearGradient>
+                    </defs>
+
+                    <path d="M0,60 Q90,35 180,55 T360,45 T540,65 T720,40 T900,50 T1080,45 T1200,55 L1200,180 L0,180 Z" fill="url(#fogPuffGrad)" opacity="0.6" filter="url(#fogCloudTurbulence)" />
+                    <path d="M-20,80 Q40,45 110,60 Q160,35 230,50 Q300,70 380,55 Q440,30 500,45 Q560,20 610,50 Q670,60 730,40 Q800,65 870,45 Q940,25 1010,48 Q1080,62 1140,40 Q1180,52 1220,68 L1220,180 L-20,180 Z" fill="url(#fogFadeGrad)" opacity="0.85" filter="url(#fogCloudTurbulence)" />
+                    <path d="M0,95 C60,78 100,90 150,82 C210,70 270,86 320,74 C390,58 430,82 490,68 C540,50 590,66 640,86 C700,70 760,90 820,78 C880,55 930,70 990,82 C1060,68 1120,78 1200,86 L1200,180 L0,180 Z" fill="#fcfbfa" filter="url(#fogCloudTurbulence)" />
+                    <rect x="0" y="150" width="1200" height="30" fill="#fcfbfa" />
+                </svg>
+            </div>
+        </header>
+
+        <section class="px-6 pt-10 pb-4 text-center">
+            <p class="text-xs text-[#524749] leading-relaxed max-w-xs mx-auto">
+                Con la bendición y el amor incondicional de mis padres:
+            </p>
+
+            <div class="mt-3 space-y-1">
+                <p class="font-serif-title text-base sm:text-lg font-medium text-[#583375]">Guillermo M. Serna Vázquez</p>
+                <span class="text-xs text-[#aa8c70] font-serif italic">&</span>
+                <p class="font-serif-title text-base sm:text-lg font-medium text-[#583375]">Liliana Ramírez Gutiérrez</p>
+            </div>
+        </section>
+
+        <section class="px-6 pt-4 pb-4 text-center relative">
+            <div class="relative mx-auto w-24 h-24 mb-3">
+                <div class="w-full h-full rounded-full overflow-hidden p-1 bg-gradient-to-tr from-[#8257a6] via-[#aa8c70] to-[#f6f2ee] shadow-lg">
+                    <img src="teinvito.webp"
+                         alt="Soffia retrato" 
+                         class="w-full h-full object-cover rounded-full">
+                </div>
+            </div>
+            
+            <p class="font-serif-title uppercase tracking-[0.25em] text-[11px] font-semibold text-[#8257a6] mb-2">Te invito a acompañarme</p>
+
+            <p class="text-xs text-[#524749] leading-relaxed max-w-xs mx-auto mb-3">
+                Hoy mi corazón se llena de ilusión al comenzar una nueva etapa, llena de sueños, aprendizajes y momentos por descubrir. Celebro con alegría cada recuerdo que me ha traído hasta aquí y la emoción de todo lo bonito que está por venir.
+            </p>
+
+            <p class="text-xs text-[#583375] leading-relaxed font-medium max-w-xs mx-auto">
+                En esta noche tan especial, quiero compartir mi felicidad con las personas que forman parte de mi historia. Tu presencia hará que este sueño se convierta en un recuerdo inolvidable, y no hay mejor regalo que tenerte a mi lado para celebrar mis XV años.
+            </p>
+
+            <p class="font-script text-3xl text-[#8257a6] mt-4">Con todo mi cariño, Soffia</p>
+
+            <div class="flex items-center justify-center gap-2 text-[#aa8c70] mt-3">
+                <span class="h-[1px] w-12 bg-[#aa8c70]/40"></span>
+                <svg class="w-4 h-4 text-[#aa8c70]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 7.5a4.5 4.5 0 0 0-4.5 4.5c0 2.8 2.2 4.2 4.5 6 2.3-1.8 4.5-3.2 4.5-6a4.5 4.5 0 0 0-4.5-4.5z"/>
+                    <path d="M12 7.5C10.5 5 11 3 12 3s1.5 2 0 4.5"/>
+                    <path d="M10 10c.8-.7 1.4-.9 2-.9s1.2.2 2 .9"/>
+                    <path d="M12 18v3.5"/>
+                    <path d="M12 19.5c-1.5.5-3 0-4-1"/>
+                    <path d="M12 20.5c1.5.5 3 0 4-1"/>
+                </svg>
+                <span class="h-[1px] w-12 bg-[#aa8c70]/40"></span>
+            </div>
+        </section>
+
+        <section class="px-8 py-10 mt-4 mb-0 text-center relative bg-gradient-to-r from-[#f6f2ee] via-[#efeae5] to-[#f6f2ee] border-t border-[#aa8c70]/30 flex flex-col items-center justify-center">
+            <span class="text-4xl text-[#aa8c70] font-serif leading-none select-none">“</span>
+            <blockquote class="font-serif-title text-lg text-[#583375] italic font-medium max-w-xs mx-auto leading-relaxed my-2 text-center">
+                Hay noches que se convierten en recuerdos eternos y sueños que merecen ser celebrados.
+            </blockquote>
+            <span class="text-4xl text-[#aa8c70] font-serif leading-none select-none">”</span>
+        </section>
+
+        <div class="bg-[#F4EDFA] transition-colors duration-300">
+
+        <section class="px-6 pt-8 pb-8">
+            <div class="text-center mb-6">
+                <h2 class="font-serif-title uppercase tracking-widest text-xs font-semibold text-[#583375]">Sesión de Fotos</h2>
+                <div class="w-8 h-[1.5px] bg-[#aa8c70] mx-auto mt-1"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 overflow-hidden py-2 px-1">
+                <div class="polaroid-card reveal-left p-2 pb-4 rounded-sm cursor-pointer shadow-md" style="--natural-rotation: -1.5deg;" onclick="openLightbox('https://i.postimg.cc/nzwmr29r/xv1.jpg')">
+                    <div class="aspect-[3/4] overflow-hidden bg-[#f6f2ee] rounded-xs">
+                        <img src="sesion1.webp" alt="Soffia Foto 1" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="polaroid-card reveal-right p-2 pb-4 rounded-sm cursor-pointer shadow-md" style="--natural-rotation: 1.5deg;" onclick="openLightbox('https://i.postimg.cc/mD69kj1D/xv2.jpg')">
+                    <div class="aspect-[3/4] overflow-hidden bg-[#f6f2ee] rounded-xs">
+                        <img src="sesion2.webp" alt="Soffia Foto 2" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="polaroid-card reveal-left p-2 pb-4 rounded-sm cursor-pointer shadow-md" style="--natural-rotation: 1deg;" onclick="openLightbox('https://i.postimg.cc/cH53Cht1/xv3.jpg')">
+                    <div class="aspect-[3/4] overflow-hidden bg-[#f6f2ee] rounded-xs">
+                        <img src="sesion3.webp" alt="Soffia Foto 3" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="polaroid-card reveal-right p-2 pb-4 rounded-sm cursor-pointer shadow-md" style="--natural-rotation: -2deg;" onclick="openLightbox('https://i.postimg.cc/TwHb105T/xv5.jpg')">
+                    <div class="aspect-[3/4] overflow-hidden bg-[#f6f2ee] rounded-xs">
+                        <img src="sesion4.webp" alt="Soffia Foto 4" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="polaroid-card reveal-left p-2 pb-4 rounded-sm cursor-pointer shadow-md" style="--natural-rotation: -1deg;" onclick="openLightbox('https://i.postimg.cc/mD69kj1L/xv6.jpg')">
+                    <div class="aspect-[3/4] overflow-hidden bg-[#f6f2ee] rounded-xs">
+                        <img src="sesion5.webp" alt="Soffia Foto 5" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="polaroid-card reveal-right p-2 pb-4 rounded-sm cursor-pointer shadow-md" style="--natural-rotation: 2deg;" onclick="openLightbox('https://i.postimg.cc/MTrBH5fX/xv9.png')">
+                    <div class="aspect-[3/4] overflow-hidden bg-[#f6f2ee] rounded-xs">
+                        <img src="sesion6.webp" alt="Soffia Foto 6" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 py-8">
+            <div class="text-center mb-6">
+                <div class="w-8 h-8 mx-auto rounded-full bg-white/90 border border-[#aa8c70]/30 text-[#8257a6] flex items-center justify-center mb-1 shadow-sm">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                </div>
+                <h2 class="font-serif-title uppercase tracking-widest text-xs font-semibold text-[#583375]">Locaciones</h2>
+            </div>
+
+            <div class="space-y-5">
+                <div class="wine-card rounded-2xl p-5 text-center border border-[#aa8c70]/30">
+                    <p class="text-xs text-[#8257a6] font-semibold">Ceremonia Religiosa</p>
+                    <h3 class="font-serif-title text-lg font-semibold text-[#583375] mt-0.5">Iglesia Sagrada Familia</h3>
+                    <div class="inline-flex items-center gap-1 text-[11px] text-[#583375] bg-[#f6f2ee] border border-[#aa8c70]/30 px-3 py-1 rounded-full mt-2 font-medium">
+                        <i data-lucide="calendar" class="w-3.5 h-3.5 text-[#aa8c70]"></i>
+                        <span>07:00 p.m.</span>
+                    </div>
+                    <div class="mt-4">
+                        <a href="https://maps.app.goo.gl/G2VyGjk367VDwKPj6?g_st=ac" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 text-xs text-[#583375] bg-white border border-[#aa8c70]/50 px-4 py-2 rounded-full shadow-sm hover:bg-[#f6f2ee] transition">
+                            <i data-lucide="navigation" class="w-3.5 h-3.5 text-[#8257a6]"></i>
+                            <span>Ver ubicación en Mapa</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="wine-card rounded-2xl p-5 text-center border border-[#aa8c70]/30">
+                    <p class="text-xs text-[#8257a6] font-semibold">Recepción & Fiesta</p>
+                    <h3 class="font-serif-title text-lg font-semibold text-[#583375] mt-0.5">El Patio RS</h3>
+                    <div class="inline-flex items-center gap-1 text-[11px] text-[#583375] bg-[#f6f2ee] border border-[#aa8c70]/30 px-3 py-1 rounded-full mt-2 font-medium">
+                        <i data-lucide="clock" class="w-3.5 h-3.5 text-[#aa8c70]"></i>
+                        <span>08:00 p.m.</span>
+                    </div>
+                    <div class="mt-4">
+                        <a href="https://maps.app.goo.gl/ZzfrfBNP1ZqcQG8M8" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 text-xs text-[#583375] bg-white border border-[#aa8c70]/50 px-4 py-2 rounded-full shadow-sm hover:bg-[#f6f2ee] transition">
+                            <i data-lucide="navigation" class="w-3.5 h-3.5 text-[#8257a6]"></i>
+                            <span>Ver ubicación en Mapa</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 py-6">
+            <div class="wine-card rounded-2xl p-6 text-center border border-[#aa8c70]/30 shadow-sm">
+                <h2 class="font-serif-title uppercase tracking-widest text-xs font-semibold text-[#583375]">Código de Vestimenta</h2>
+                <div class="w-10 h-[1px] bg-[#aa8c70]/40 mx-auto mt-2 mb-5"></div>
+
+                <div class="flex items-center justify-center gap-10 sm:gap-14">
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-24 flex items-center justify-center text-[#8257a6] filter drop-shadow-sm transition-transform duration-300 group-hover:scale-105">
+                            <svg class="w-full h-full" viewBox="0 0 64 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M25 8 Q23 16 22 22" stroke-width="1.8"/>
+                                <path d="M39 8 Q41 16 42 22" stroke-width="1.8"/>
+                                <path d="M22 22 Q32 26 42 22 Q41 33 39 38 Q32 40 25 38 Q23 33 22 22 Z" fill="#8257a6" fill-opacity="0.12" stroke-width="1.8"/>
+                                <path d="M32 24.5 V39" stroke-width="1.2" stroke-dasharray="1.5 2"/>
+                                <path d="M24 38 Q32 40.5 40 38" stroke="#aa8c70" stroke-width="2.2"/>
+                                <circle cx="32" cy="39" r="1.5" fill="#aa8c70"/>
+                                <path d="M24 38 Q16 62 10 88 Q22 93 32 93 Q42 93 54 88 Q48 62 40 38 Z" fill="#8257a6" fill-opacity="0.08" stroke-width="1.8"/>
+                                <path d="M24 44 Q23 68 20 90" stroke-width="1.2" stroke-opacity="0.6"/>
+                                <path d="M32 40 Q32 66 32 93" stroke-width="1.2" stroke-opacity="0.6"/>
+                                <path d="M40 44 Q41 68 44 90" stroke-width="1.2" stroke-opacity="0.6"/>
+                                <path d="M14 26 L15.5 27.5 L14 29 L12.5 27.5 Z" fill="#aa8c70"/>
+                                <path d="M49 52 L50.5 53.5 L49 55 L47.5 53.5 Z" fill="#aa8c70"/>
+                            </svg>
+                        </div>
+                        <span class="font-serif-title text-xs tracking-wider uppercase font-semibold text-[#583375] mt-2">Damas</span>
+                        <span class="text-[10px] text-[#524749] mt-0.5">Vestido largo</span>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center gap-1.5 opacity-60">
+                        <span class="w-1 h-1 rounded-full bg-[#aa8c70]"></span>
+                        <span class="w-1.5 h-1.5 rotate-45 border border-[#aa8c70]"></span>
+                        <span class="w-1 h-1 rounded-full bg-[#aa8c70]"></span>
+                    </div>
+
+                    <div class="flex flex-col items-center group">
+                        <div class="w-16 h-24 flex items-center justify-center text-[#583375] filter drop-shadow-sm transition-transform duration-300 group-hover:scale-105">
+                            <svg class="w-full h-full" viewBox="0 0 64 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="26,10 32,18 38,10" fill="#ffffff" stroke="currentColor" stroke-width="1.3"/>
+                                <line x1="32" y1="18" x2="32" y2="38" stroke="currentColor" stroke-width="1.2" stroke-dasharray="1.5 2.5"/>
+                                <circle cx="32" cy="24" r="0.9" fill="#583375"/>
+                                <circle cx="32" cy="30" r="0.9" fill="#583375"/>
+                                <path d="M27.5 13 L36.5 17 V13 L27.5 17 Z" fill="#8257a6" stroke="#583375" stroke-width="1.2"/>
+                                <circle cx="32" cy="15" r="1.3" fill="#aa8c70"/>
+                                <path d="M23 11 C26 23 27 34 32 39 C37 34 38 23 41 11" stroke-width="1.6" fill="#583375" fill-opacity="0.12"/>
+                                <path d="M21 24.5 L24.5 24.5" stroke="#aa8c70" stroke-width="1.5"/>
+                                <polygon points="22,24.5 23.2,21.5 24.2,24.5" fill="#aa8c70" stroke="#aa8c70" stroke-width="0.8"/>
+                                <path d="M18 14 L23 11 H41 L46 14 L44.5 38 C38 41 26 41 19.5 38 Z" stroke-width="1.6" fill="#583375" fill-opacity="0.06"/>
+                                <path d="M18 14 L16 35 L19.5 36" stroke-width="1.4"/>
+                                <path d="M46 14 L48 35 L44.5 36" stroke-width="1.4"/>
+                                <line x1="23.5" y1="38" x2="40.5" y2="38" stroke="#aa8c70" stroke-width="2"/>
+                                <circle cx="32" cy="38" r="1.2" fill="#aa8c70"/>
+                                <path d="M23.5 38 L22 89 H28 L30.5 48 C31.2 44 32.8 44 33.5 48 L36 89 H42 L40.5 38 Z" fill="#583375" fill-opacity="0.14" stroke-width="1.6"/>
+                                <line x1="25" y1="44" x2="25" y2="87" stroke-width="1" stroke-opacity="0.45"/>
+                                <line x1="39" y1="44" x2="39" y2="87" stroke-width="1" stroke-opacity="0.45"/>
+                                <path d="M21 89 Q25 87.5 28.5 89" stroke="#aa8c70" stroke-width="2.4"/>
+                                <path d="M35.5 89 Q39 87.5 43 89" stroke="#aa8c70" stroke-width="2.4"/>
+                            </svg>
+                        </div>
+                        <span class="font-serif-title text-xs tracking-wider uppercase font-semibold text-[#583375] mt-2">Caballeros</span>
+                        <span class="text-[10px] text-[#524749] mt-0.5">Traje formal</span>
+                    </div>
+                </div>
+
+                <p class="text-[10px] text-[#a4999b] mt-5 mb-1 italic">
+                    Agradecemos su distinguida presencia vistiendo con formalidad para esta gran noche.
+                </p>
+
+                <div class="mt-4 pt-4 border-t border-[#aa8c70]/25 flex flex-col items-center">
+                    <div class="relative flex items-center justify-center">
+                        <span class="w-8 h-8 rounded-full bg-[#8257a6] shadow-md border-2 border-white ring-2 ring-[#8257a6]/30 inline-block"></span>
+                    </div>
+                    <p class="font-serif-title text-xs uppercase tracking-wider font-semibold text-[#8257a6] mt-2">
+                        Color Reservado
+                    </p>
+                    <p class="text-[11px] text-[#524749] mt-0.5 italic max-w-xs">
+                        El color <strong class="text-[#8257a6] font-semibold">lila</strong> es reservado exclusivamente para la quinceañera.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 py-4">
+            <div class="wine-card rounded-2xl p-5 text-center border border-[#aa8c70]/30 shadow-sm">
+                <h2 class="font-serif-title uppercase tracking-widest text-xs font-semibold text-[#583375]">
+                    No niños
+                </h2>
+                <div class="w-8 h-[1px] bg-[#aa8c70]/40 mx-auto my-2"></div>
+                <p class="text-xs text-[#524749] leading-relaxed max-w-xs mx-auto">
+                    Adoramos a los pequeños de la familia, sin embargo, deseamos que esta noche sea un momento de descanso y disfrute para ti.
+                </p>
+                <p class="font-serif-title italic text-xs text-[#8257a6] mt-2 font-medium">
+                    Agradecemos de antemano tu comprensión y cariño.
+                </p>
+            </div>
+        </section>
+
+        <section id="rsvp-section" class="px-6 py-8">
+            <div class="text-center mb-4">
+                <div class="w-8 h-8 mx-auto rounded-full bg-white/90 border border-[#aa8c70]/30 text-[#8257a6] flex items-center justify-center mb-1 shadow-sm">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                </div>
+                <h2 class="font-serif-title uppercase tracking-widest text-xs font-semibold text-[#583375]">Confirmación de Asistencia</h2>
+                <p class="text-[11px] text-[#524749] mt-1">Me hará muy feliz saber si podré contar contigo en este día tan especial.</p>
+
+                <p class="text-[11px] font-semibold text-[#8257a6] mt-2">Confirma antes del 1 de noviembre de 2026</p>
+            </div>
+
+            <form id="rsvpForm" class="space-y-3 mt-4" onsubmit="handleWhatsAppRSVP(event)">
+                <div>
+                    <label class="block text-[11px] font-medium text-[#583375] mb-1">Nombre Completo *</label>
+                    <input type="text" id="rsvpFullName" required placeholder="Ingresa tu nombre y apellido" class="w-full text-xs px-3 py-2.5 rounded-xl border border-[#aa8c70]/40 bg-white focus:outline-none focus:ring-2 focus:ring-[#8257a6]">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-medium text-[#583375] mb-1">Cantidad de personas *</label>
+                    <select id="rsvpGuests" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-[#aa8c70]/40 bg-white text-[#524749] focus:outline-none focus:ring-2 focus:ring-[#8257a6]">
+                        <option value="">Selecciona cantidad</option>
+                        <option value="1 persona">1 Persona</option>
+                        <option value="2 personas">2 Personas</option>
+                        <option value="3 personas">3 Personas</option>
+                        <option value="4 personas">4 Personas</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-medium text-[#583375] mb-1">Confirmación *</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="flex items-center justify-center gap-1.5 p-2 rounded-xl border border-[#aa8c70]/40 bg-white text-xs text-[#524749] cursor-pointer has-[:checked]:bg-[#8257a6] has-[:checked]:text-white transition shadow-sm">
+                            <input type="radio" name="attendance" value="Sí, con mucho gusto asistiré" required class="hidden">
+                            <span>Sí asistiré</span>
+                        </label>
+                        <label class="flex items-center justify-center gap-1.5 p-2 rounded-xl border border-[#aa8c70]/40 bg-white text-xs text-[#524749] cursor-pointer has-[:checked]:bg-[#8257a6] has-[:checked]:text-white transition shadow-sm">
+                            <input type="radio" name="attendance" value="Lamentablemente no podré asistir" required class="hidden">
+                            <span>No podré asistir</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3 bg-[#25D366] hover:bg-[#1faa53] text-white rounded-xl font-medium text-xs shadow-md shadow-[#25D366]/25 flex items-center justify-center gap-2 transition active:scale-[0.99]">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                        </svg>
+                        <span>Confirmar vía WhatsApp</span>
+                    </button>
+
+                    <div class="mt-4 text-center">
+                        <div class="w-full py-2.5 px-4 bg-white/95 border-2 border-[#8257a6]/45 rounded-xl shadow-sm flex items-center justify-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#8257a6] animate-pulse"></span>
+                            <p class="font-serif-title text-xs sm:text-sm tracking-[0.22em] font-bold text-[#583375] uppercase">
+                                INVITACIÓN INTRANSFERIBLE
+                            </p>
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#8257a6] animate-pulse"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section class="px-6 py-6 text-center">
+            <div class="w-8 h-8 mx-auto rounded-full bg-white/90 border border-[#aa8c70]/30 text-[#8257a6] flex items-center justify-center mb-1 shadow-sm">
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+            </div>
+            <h3 class="font-serif-title uppercase tracking-widest text-xs font-semibold text-[#583375] mb-1">¡Guarda la fecha!</h3>
+            <p class="text-xs text-[#8257a6] mb-3">Sábado, 14 de noviembre de 2026</p>
+
+            <button onclick="addToGoogleCalendar()" class="w-full py-3 bg-[#8257a6] hover:bg-[#583375] text-white rounded-xl font-medium text-xs shadow-md shadow-[#8257a6]/25 flex items-center justify-center gap-2 transition active:scale-[0.99]">
+                <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+                <span>Agregar a mi Calendario</span>
+            </button>
+        </section>
+
+        <section class="px-6 py-8 text-center border-t border-[#aa8c70]/25 bg-white/40">
+            <div class="w-8 h-8 mx-auto rounded-full bg-white/90 border border-[#aa8c70]/30 text-[#8257a6] flex items-center justify-center mb-2 shadow-sm">
+                <i data-lucide="hash" class="w-4 h-4"></i>
+            </div>
+            <h3 class="font-serif-title text-xs uppercase tracking-widest text-[#583375] font-semibold">¡Comparte el momento!</h3>
+            <p class="text-[11px] text-[#524749] mt-1 mb-3">Comparte conmigo este momento usando mi hashtag</p>
+
+            <button onclick="copyHashtag('#XVSoffia')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-[#583375] border border-[#aa8c70]/50 text-xs font-semibold hover:bg-[#f6f2ee] transition shadow-sm">
+                <span>#XVSoffia</span>
+                <i data-lucide="copy" class="w-3.5 h-3.5 text-[#8257a6]"></i>
+            </button>
+
+            <div id="copyToast" class="hidden text-[10px] text-[#8257a6] font-medium mt-1">¡Hashtag copiado al portapapeles!</div>
+
+            <div class="flex justify-center gap-4 mt-5">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center justify-center text-xs text-[#524749] bg-white border border-[#aa8c70]/40 px-5 py-2 rounded-full shadow-sm hover:bg-[#f6f2ee] min-w-[110px] text-center font-medium transition">
+                    <span class="inline-block text-center">Instagram</span>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center justify-center text-xs text-[#524749] bg-white border border-[#aa8c70]/40 px-5 py-2 rounded-full shadow-sm hover:bg-[#f6f2ee] min-w-[110px] text-center font-medium transition">
+                    <span class="inline-block text-center">Facebook</span>
+                </a>
+            </div>
+
+            <footer class="mt-8 pt-4 border-t border-[#aa8c70]/20 text-[10px] text-[#a4999b]">
+                <p>AJ Crafting Lab • 2026</p>
+            </footer>
+        </section>
+
+        </div>
+
+    </div>
+
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="closeLightbox()">
+        <button class="absolute top-4 right-4 text-white p-2 rounded-full bg-white/20 hover:bg-white/40 transition">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Ampliación foto" class="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain" onclick="event.stopPropagation()">
+    </div>
+
+    <div id="globalToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#583375] text-white text-xs px-4 py-2 rounded-full shadow-lg backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        Mensaje
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const targetDate = new Date('November 14, 2026 18:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                const elDays = document.getElementById('days');
+                const elHours = document.getElementById('hours');
+                const elMinutes = document.getElementById('minutes');
+                const elSeconds = document.getElementById('seconds');
+
+                if (elDays) elDays.textContent = String(days).padStart(3, '0');
+                if (elHours) elHours.textContent = String(hours).padStart(2, '0');
+                if (elMinutes) elMinutes.textContent = String(minutes).padStart(2, '0');
+                if (elSeconds) elSeconds.textContent = String(seconds).padStart(2, '0');
+            } else {
+                const elDays = document.getElementById('days');
+                if (elDays) {
+                    document.getElementById('days').textContent = "000";
+                    document.getElementById('hours').textContent = "00";
+                    document.getElementById('minutes').textContent = "00";
+                    document.getElementById('seconds').textContent = "00";
+                }
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        const petalsContainer = document.getElementById('petals-container');
+        const numPetals = 16;
+
+        for (let i = 0; i < numPetals; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const size = Math.random() * 14 + 10;
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size * 1.3}px`;
+            petal.style.left = `${Math.random() * 100}vw`;
+            petal.style.animationDuration = `${Math.random() * 8 + 7}s`;
+            petal.style.animationDelay = `${Math.random() * 5}s`;
+            petalsContainer.appendChild(petal);
+        }
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.reveal-left, .reveal-right').forEach(card => {
+            revealObserver.observe(card);
+        });
+
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+        }
+
+        function copyHashtag(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                const toast = document.getElementById('copyToast');
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 2500);
+            } catch (err) {
+                console.error(err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('globalToast');
+            toast.textContent = msg;
+            toast.classList.remove('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        function handleWhatsAppRSVP(event) {
+            event.preventDefault();
+
+            const phoneNumber = "528671579999";
+
+            const fullName = document.getElementById('rsvpFullName').value.trim();
+            const guests = document.getElementById('rsvpGuests').value;
+            const attendance = document.querySelector('input[name="attendance"]:checked')?.value || "Confirmado";
+
+            let message = `¡Hola Soffia! ✨\n\n`;
+            message += `Soy *${fullName}*.\n`;
+            message += `*Confirmación:* ${attendance}\n`;
+            message += `*Boletos/Asistentes:* ${guests}\n`;
+            message += `\n¡Gracias por la invitación a tus XV Años! 👑`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            showToast("Abriendo WhatsApp...");
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+            }, 400);
+        }
+
+        function addToGoogleCalendar() {
+            const title = encodeURIComponent("Mis XV Años - Soffia");
+            const details = encodeURIComponent("Celebración de Mis XV Años. Ceremonia en Iglesia Sagrada Familia (7:00 PM) y Recepción en El Patio RS (8:00 PM).");
+            const location = encodeURIComponent("Iglesia Sagrada Familia / El Patio RS");
+            const dates = "20261114T190000/20261115T030000";
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
+            window.open(url, '_blank');
+        }
+
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        let isMusicPlaying = false;
+
+        function setMusicPlayingState(playing) {
+            const icon = document.getElementById('musicIcon');
+            isMusicPlaying = playing;
+            if (playing) {
+                icon.setAttribute('data-lucide', 'volume-2');
+            } else {
+                icon.setAttribute('data-lucide', 'volume-x');
+            }
+            lucide.createIcons();
+        }
+
+        function playMusicSafely() {
+            if (isMusicPlaying) return;
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    setMusicPlayingState(true);
+                    showToast("Música reproduciéndose 🎵");
+                    removeInteractionListeners();
+                }).catch(() => {
+                    setMusicPlayingState(false);
+                });
+            }
+        }
+
+        window.addEventListener('load', () => {
+            playMusicSafely();
+        });
+
+        function onFirstUserInteraction() {
+            playMusicSafely();
+        }
+
+        function removeInteractionListeners() {
+            ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
+                window.removeEventListener(event, onFirstUserInteraction);
+            });
+        }
+
+        ['click', 'touchstart', 'scroll', 'keydown'].forEach(event => {
+            window.addEventListener(event, onFirstUserInteraction, { once: true, passive: true });
+        });
+
+        musicToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => {
+                    setMusicPlayingState(true);
+                    showToast("Música reproduciéndose 🎵");
+                    removeInteractionListeners();
+                }).catch(err => {
+                    console.warn(err);
+                    showToast("Toca de nuevo para reproducir");
+                });
+            } else {
+                bgMusic.pause();
+                setMusicPlayingState(false);
+                showToast("Música pausada");
+            }
+        });
+    </script>
+</body>
+</html>
