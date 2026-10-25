@@ -460,17 +460,6 @@
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-medium text-[#583375] mb-1">Cantidad de personas *</label>
-                    <select id="rsvpGuests" required class="w-full text-xs px-3 py-2.5 rounded-xl border border-[#aa8c70]/40 bg-white text-[#524749] focus:outline-none focus:ring-2 focus:ring-[#8257a6]">
-                        <option value="">Selecciona cantidad</option>
-                        <option value="1 persona">1 Persona</option>
-                        <option value="2 personas">2 Personas</option>
-                        <option value="3 personas">3 Personas</option>
-                        <option value="4 personas">4 Personas</option>
-                    </select>
-                </div>
-
-                <div>
                     <label class="block text-[11px] font-medium text-[#583375] mb-1">Confirmación *</label>
                     <div class="grid grid-cols-2 gap-2">
                         <label class="flex items-center justify-center gap-1.5 p-2 rounded-xl border border-[#aa8c70]/40 bg-white text-xs text-[#524749] cursor-pointer has-[:checked]:bg-[#8257a6] has-[:checked]:text-white transition shadow-sm">
@@ -675,13 +664,11 @@
             const phoneNumber = "528671579999";
 
             const fullName = document.getElementById('rsvpFullName').value.trim();
-            const guests = document.getElementById('rsvpGuests').value;
             const attendance = document.querySelector('input[name="attendance"]:checked')?.value || "Confirmado";
 
             let message = `¡Hola Soffia! ✨\n\n`;
             message += `Soy *${fullName}*.\n`;
             message += `*Confirmación:* ${attendance}\n`;
-            message += `*Boletos/Asistentes:* ${guests}\n`;
             message += `\n¡Gracias por la invitación a tus XV Años! 👑`;
 
             const encodedMessage = encodeURIComponent(message);
